@@ -1,8 +1,3 @@
-# Solve y'' - y' + 3y = x
-# Let y' = z  =>  z' = z - 3y + x
-# Initial conditions: y(0)=1, z(0)=-2
-# Using classical 4th order Runge–Kutta method
-
 def f(x, y, z):
     # z' = z - 3y + x
     return z - 3*y + x
@@ -11,13 +6,11 @@ def f(x, y, z):
 x0 = 0.0
 y0 = 1.0
 z0 = -2.0
-h = 0.01     # step size
+h = 0.01
 x_end = 4.0
 
-# Number of steps
 n = int((x_end - x0) / h)
 
-# Initialize variables
 def rk4Method(f, x0, y0, z0, h, x_end):
     x = x0
     y = y0
@@ -60,17 +53,14 @@ def eulerMethod(f, x0, y0, z0, h, x_end):
     y = y0
     z = z0
 
-    # Lists for results
     x_vals = [x]
     y_vals = [y]
     z_vals = [z]
 
-    # Euler iteration
     for i in range(n):
         dy = h * z
         dz = h * f(x, y, z)
 
-        # Apply the changes simultaneously
         y += dy
         z += dz
         x += h
@@ -78,7 +68,6 @@ def eulerMethod(f, x0, y0, z0, h, x_end):
         x_vals.append(x)
         y_vals.append(y)
         z_vals.append(z)
-
 
     # Print sample results every 0.5 step
     step_show = int(0.5 / h)
