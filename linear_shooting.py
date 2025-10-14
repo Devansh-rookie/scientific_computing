@@ -44,13 +44,13 @@ def linearShooting(f, a, b, ya, yb, h):
     x1, y1, z1 = rk4(f, a, ya, 0.0, h, b)
 
     # Solve second IVP
-    x2, y2, z2 = rk4(f, a, 0.0, 1.0, h, b)
+    x2, y2, z2 = rk4(f, a, ya, 1.0, h, b)
 
     # Compute constant c
-    c = (yb - y1[-1]) / y2[-1]
+    c = (yb - y2[-1]) / (y1[-1] - y2[-1])
 
     # Construct final solution
-    y_final = [y1[i] + c * y2[i] for i in range(len(y1))]
+    y_final = [c*y1[i] + (1 - c) * y2[i] for i in range(len(y1))]
 
     # Print sample values
     step_show = int(0.1 / h)

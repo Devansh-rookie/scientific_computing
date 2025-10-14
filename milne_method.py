@@ -12,14 +12,14 @@ def milne_method(x0, y0, h, f, xn):
     steps = int((xn -x0)/h)
     for i in range(3):
         yvals.append(rk_4_method(xvals[-1], yvals[-1], h, f))
-        xvals.append(round(xvals[-1] + h, 1))
+        xvals.append(xvals[-1] + h)
 
     for i in range(steps - 3):
         pred = yvals[-4] + 4*h*(2*f(xvals[-1], yvals[-1]) - f(xvals[-2], yvals[-2]) + 2*f(xvals[-3], yvals[-3]))/3
 
         corrected = yvals[-2] + h*(f(xvals[-1] + h, pred) + 4*f(xvals[-1], yvals[-1]) + f(xvals[-2], yvals[-2]))/3
         yvals.append(corrected)
-        xvals.append(round(xvals[-1] + h, 1))
+        xvals.append(xvals[-1] + h)
 
     return xvals, yvals
 
